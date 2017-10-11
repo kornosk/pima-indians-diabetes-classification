@@ -1,0 +1,26 @@
+########## Answers for Homework 5 ##########
+
+2. Average accuracy from 10-folds cross validation is as follow.
+	KNN: 0.697197 with SD = 0.049779
+	CART: 0.620518 with SD = 0.048222
+
+5. Analyze process and results
+	i) 	Data of most features are skewed to the right ('age', 'diabetes-pedigree-function', 'pregnant-time', 'serum-insulin', 'skin-fold-thickness')
+		Data of some feature are like normal distribution ('blood-pressure', 'body-mass-index', 'glucose-concentration')
+	ii)	KNN performs a little bit better than Decision Tree regarding accuracy, precision, recall and also F1 score.
+		
+		### KNN results on test data
+		Accuracy: 0.681818181818
+		Precision: 0.67
+		Recall: 0.68
+		F1: 0.66
+
+		### CART results on test data
+		Accuracy: 0.642857142857
+		Precision: 0.65
+		Recall: 0.64
+		F1: 0.64
+
+		# Note that the results can be different every time we run the code
+
+	iii) 
