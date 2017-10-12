@@ -204,5 +204,3 @@ print('Accuracy: ' + str(accuracy_score(Y_validate, predictions)))
 print(confusion_matrix(Y_validate, predictions))
 print(classification_report(Y_validate, predictions))
 
-
-# X = valueArray[:, [1,2,3,7]]					

@@ -7,12 +7,15 @@
 
 4.	At first, my assumption is to use four features that are highest standard deviation (feature index: 'glucose-concentration', 'blood-pressure', 'skin-fold-thickness', 'serum-insulin').
 	If feature's STD is low, that means that feature has not much different. Then it cannot be used as feature to do classification task.
+	Second assumption is checking correlation between each feature and class (output), then use the four highest features.
 	
 	Anyway, after we try running all possible combinations, the group of four that gives highest average accuracy (10-fold) is ['glucose-concentration', 'blood-pressure', 'skin-fold-thickness', 'age'].
-	My assumption is almost correct except 'serum-insulin' => 'age'. After consider the STD, STD of 'serum-insulin' feature is highest and totally much more others.
-	My another assumption is because its STD is too high that it contains lots of noise.
+	My first assumption is almost correct except 'serum-insulin' => 'age'. After consider the STD, STD of 'serum-insulin' feature is highest and totally much more other three.
+	I think this is because its STD is too high that it contains lots of noise.
+
+	I have tried using four features that have highest correlation to the output class, but it still gave me lower performance on test data than my selected features.
 	
-	Therefore, I choose ['glucose-concentration', 'blood-pressure', 'skin-fold-thickness', 'age'] as the best four features.
+	Therefore, I choose ['glucose-concentration', 'blood-pressure', 'skin-fold-thickness', 'age'] as the best four features, which can give us the best accuracy on cross validation.
 
 
 5. 	Analyze process and results
