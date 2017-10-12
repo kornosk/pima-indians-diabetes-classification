@@ -21,6 +21,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn import preprocessing
+import numpy as np
 
 ######################################################
 # Load the data
@@ -97,6 +98,14 @@ X_train, X_validate, Y_train, Y_validate = train_test_split(X, Y, test_size=test
 X_train = preprocessing.normalize(X_train)
 X_validate = preprocessing.normalize(X_validate)
 
+# Check Standard Deviation on normalized data
+print()
+print("########## Standard Deviation after Normalization ##########")
+for i in range(0, valueArray[:,0:len(attributeNames)-1].shape[1]):		# Column number
+	print("Standard Deviation of training #" + str(i+1) + " : " + str(np.std(preprocessing.normalize(valueArray[:,0:len(attributeNames)-1])[:, i])))
+
+print()
+
 
 # Setup 10-fold cross validation to estimate the accuracy of different models
 # Split data into 10 parts
@@ -138,7 +147,7 @@ knn.fit(X_train, Y_train)
 predictions = knn.predict(X_validate)
 
 print()
-print('########## KNN: Test Results ##########')
+print('########## KNN: Test Results (All features) ##########')
 print('Accuracy: ' + str(accuracy_score(Y_validate, predictions)))
 print(confusion_matrix(Y_validate, predictions))
 print(classification_report(Y_validate, predictions))
@@ -153,7 +162,47 @@ cart.fit(X_train, Y_train)
 predictions = cart.predict(X_validate)
 
 print()
-print('########## Decision Tree: Test Results ##########')
+print('########## Decision Tree: Test Results (All features) ##########')
 print('Accuracy: ' + str(accuracy_score(Y_validate, predictions)))
 print(confusion_matrix(Y_validate, predictions))
 print(classification_report(Y_validate, predictions))
+
+
+################################
+# Try choosing only 4 features #
+################################
+four_features = [1,2,3,7] # My best four features
+
+
+######################################################
+# For the best model (KNN), see how well it does on the
+# validation test
+######################################################
+# Make predictions on validation dataset
+knn = KNeighborsClassifier()
+knn.fit(X_train[:,four_features], Y_train)
+predictions = knn.predict(X_validate[:,four_features])
+
+print()
+print('########## KNN: Test Results (4 features) ##########')
+print('Accuracy: ' + str(accuracy_score(Y_validate, predictions)))
+print(confusion_matrix(Y_validate, predictions))
+print(classification_report(Y_validate, predictions))
+
+######################################################
+# For Decision Tree (CART), see how well it does on the
+# validation test
+######################################################
+# Make predictions on validation dataset
+cart = DecisionTreeClassifier()
+cart.fit(X_train[:,four_features], Y_train)
+predictions = cart.predict(X_validate[:,four_features])
+
+print()
+print('########## Decision Tree: Test Results (4 features) ##########')
+print('Accuracy: ' + str(accuracy_score(Y_validate, predictions)))
+print(confusion_matrix(Y_validate, predictions))
+print(classification_report(Y_validate, predictions))
+
+
+# X = valueArray[:, [1,2,3,7]]					
